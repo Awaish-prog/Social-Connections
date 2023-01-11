@@ -21,7 +21,7 @@ const AddConnection : React.FC<AddConnectionFunction> = ({addConnection} : AddCo
     }
 
     return (
-        <>
+        <section>
         <form onSubmit={(e) => {
             e.preventDefault()
             submitConnection()
@@ -31,7 +31,7 @@ const AddConnection : React.FC<AddConnectionFunction> = ({addConnection} : AddCo
             <input type="submit" />
         </form>
         <p>{connectionMessage}</p>
-        </>
+        </section>
     )
 }
 

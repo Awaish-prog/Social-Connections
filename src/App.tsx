@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import AddConnection from './Components/AddConnection';
+import DegreeOfSeparation from './Components/DegreeOfSeparation';
 import People from './Components/People';
 
 export interface Person {
@@ -83,6 +84,7 @@ const App: React.FC = () : JSX.Element => {
     <>
     <People people={people} addPerson={addPerson} />
     <AddConnection addConnection={addConnection} />
+    <DegreeOfSeparation people={people} />
     </>
   );
 }
