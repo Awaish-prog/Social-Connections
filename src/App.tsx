@@ -8,7 +8,7 @@ export interface Person {
   connections: number[]
 }
 
-function App() {
+const App: React.FC = () : JSX.Element => {
   const [people, setPeople] = useState<Array<Person>>([])
   const [uid, setUid] = useState<number>(1)
 
@@ -29,6 +29,12 @@ function App() {
   const addConnection : Function = (personOne: string, personTwo: string): string => {
     let personOneId : number = 0;
     let personTwoId : number = 0;
+    let personTwoRef : Person = {
+      id: 0,
+      name: "",
+      connections: []
+    };
+
     people.forEach(person => {
       if(person.name === personOne){
         personOneId = person.id;
@@ -37,14 +43,23 @@ function App() {
     if(personOneId === 0){
       return `${personOne} is not present in list of people`
     }
+    
     people.forEach(person => {
       if(person.name === personTwo){
         personTwoId = person.id;
+        personTwoRef = person
       }
     })
     if(personTwoId === 0){
       return `${personTwo} is not present in list of people`
     }
+    for(let i = 0; i < personTwoRef.connections.length; i++){
+      if(personTwoRef.connections[i] === personOneId){
+        return "These two are friends already."
+      }
+    }
+    
+
     setPeople(prev => {
       prev.forEach(person => {
         if(personOneId === person.id){
