@@ -6,10 +6,10 @@ type PeopleArray = {
     addPerson: Function
 }
 
-const People : React.FC<PeopleArray> = ({ people, addPerson } : PeopleArray) => {
+const People : React.FC<PeopleArray> = ({ people, addPerson } : PeopleArray) : JSX.Element => {
     const [personName, setPersonName] = useState<string>("")
 
-    const submitPersonName : Function = () => {
+    const submitPersonName : Function = () : void => {
         addPerson(personName)
         setPersonName("")
     }
@@ -18,7 +18,7 @@ const People : React.FC<PeopleArray> = ({ people, addPerson } : PeopleArray) => 
         <section>
             {
                 people.map(person => {
-                    return <p>{person.name}</p>
+                    return <p key={person.id}>{person.name}</p>
                 })
             }
             <form onSubmit={(e) => {
