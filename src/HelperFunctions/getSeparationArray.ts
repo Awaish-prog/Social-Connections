@@ -2,22 +2,27 @@ import { Person } from "../App";
 import { getPerson } from "./getPerson";
 
 
-const getSeparationHelper : Function = (seperationArray: Array<Person>, id: number, targetId: number, visitedIds: Array<number>, people: Array<Person>) : void => {
+const getSeparationHelper : Function = (seperationArray: Array<Person>, id: number, targetId: number, visitedIds: Array<number>, people: Array<Person>, seperationArrayCollection: Array<Array<Person>>) : void => {
+    const currentPerson = getPerson(people, id)
     if(id === targetId){
-        seperationArray.push(getPerson(people, id))
+        seperationArray.push(currentPerson)
         visitedIds.push(id)
-        return
-    }
-    if(visitedIds[visitedIds.length - 1] === targetId){
+        seperationArrayCollection.push([...seperationArray])
         return
     }
     visitedIds.push(id)
-    seperationArray.push(getPerson(people, id))
-    getPerson(people, id).connections.forEach((connection : number) => {
-        if(!visitedIds.includes(connection)){
-            getSeparationHelper(seperationArray, connection, targetId, visitedIds, people)
+    seperationArray.push(currentPerson)
+    for(let i = 0; i < currentPerson.connections.length; i++){
+        if(!visitedIds.includes(currentPerson.connections[i])){
+            getSeparationHelper(seperationArray, currentPerson.connections[i], targetId, visitedIds, people, seperationArrayCollection)
+            seperationArray.pop()
+            visitedIds.pop()
+            if(targetId === currentPerson.connections[i]){
+                return
+            }
         }
-    })
+    }
+   
 }
 
 export const getSeparation : Function = (people : Array<Person>, personOne: string, personTwo: string) : Array<Person> => {
@@ -25,6 +30,7 @@ export const getSeparation : Function = (people : Array<Person>, personOne: stri
     let personTwoId : number = 0;
     let seperationArray : Array<Person> = []
     let visitedIds : Array<number> = []
+    let seperationArrayCollection : Array<Array<Person>> = []
     people.forEach(person => {
         if(person.name === personOne){
           personOneId = person.id;
@@ -42,9 +48,16 @@ export const getSeparation : Function = (people : Array<Person>, personOne: stri
       if(personTwoId === 0){
         return seperationArray
       }
-      getSeparationHelper(seperationArray, personOneId, personTwoId, visitedIds, people)
-      if(seperationArray[seperationArray.length - 1].id !== personTwoId){
-        seperationArray = []
+      getSeparationHelper(seperationArray, personOneId, personTwoId, visitedIds, people, seperationArrayCollection)
+      if(seperationArrayCollection.length === 0){
+        return []
       }
+      seperationArray = seperationArrayCollection[0]
+      seperationArrayCollection.forEach(collection => {
+        if(collection.length < seperationArray.length){
+            seperationArray = collection
+        }
+      })
+      
       return seperationArray
 }
