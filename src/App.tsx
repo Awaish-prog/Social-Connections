@@ -12,6 +12,7 @@ export interface Person {
 const App: React.FC = () : JSX.Element => {
   const [people, setPeople] = useState<Array<Person>>([])
   const [uid, setUid] = useState<number>(1)
+  const [connections, setConnections] = useState<Array<string>>([])
 
   const addPerson: Function = (name: string) : void => {
     const newPerson : Person = {
@@ -77,13 +78,23 @@ const App: React.FC = () : JSX.Element => {
       })
       return prev
     })
+    setConnections(prev => {
+      return [...prev, `${personOne} and ${personTwo} are friends`]
+    })
     return `Connection Added between ${personOne} and ${personTwo}`
+  }
+
+  const clearData : Function = () : void => {
+    setConnections([])
+    setPeople([])
+    setUid(1)
   }
 
   return (
     <>
+    <button onClick={() => {clearData()}} className='clearButton'>Clear Data</button>
     <People people={people} addPerson={addPerson} />
-    <AddConnection addConnection={addConnection} />
+    <AddConnection addConnection={addConnection} connections={connections} />
     <DegreeOfSeparation people={people} />
     </>
   );

@@ -1,0 +1,87 @@
+:root{
+    --blue: #374785;
+    --lightYellow:#FBEEC1;
+    --lightRed : #FF652F;
+    --darkRed :  #C43300;
+    --darkBlue:  #24305E;
+}
+body, html {
+    font-family: 'Ubuntu', sans-serif;
+    width: 100%;
+    height: 110%;
+    min-height: 110vh;
+    background-color: var(--darkBlue);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.peopleForm, .connectionForm, .separationForm {
+    margin: 10px 0 5px 0;
+}
+.people, .addConnection, .degreeOfSeparation {
+    width: 70vw;
+    margin: 20px auto 0 auto;
+    background-color: var(--blue);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    min-height: 30vh;
+    border-radius: 10px;
+    justify-content: space-around;
+}
+.personNames, .connectionsDiv, .separationsDiv {
+    background-color: var(--darkBlue);
+    width: 90%;
+    margin-top: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+.personName, .connection, .separation {
+    color: var(--darkRed);
+    padding: 10px;
+    font-size: large;
+    margin: 5px 10px;
+    border-radius: 5px;
+    background-color: var(--lightYellow);
+}
+.nameInput, .submitButton, .connectionInput, .connectionSubmit, .separationInput, .separationSubmit, .clearButton {
+    margin: 10px;
+    padding: 5px 10px;
+    font-size: medium;
+    border-radius: 5px;
+    border: none;
+}
+.nameInput:focus, .connectionInput:focus, .separationInput:focus, .clearButton {
+    outline: 2px solid var(--darkRed);
+}
+.submitButton, .connectionSubmit, .separationSubmit, .clearButton {
+    width: 140px;
+    background-color: var(--lightRed);
+    color: var(--lightYellow);
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.peopleHeading, .emptyMessage, .connectionHeading, .connectionMessage, .personMessage, .separationHeading, .enterNames {
+    color: var(--lightYellow);
+    
+}
+.emptyMessage, .connectionMessage, .personMessage, .enterNames {
+    font-size: large;
+    margin: 5px;
+}
+.submitButton:hover, .connectionSubmit:hover, .separationSubmit:hover, .clearButton:hover {
+    background-color: var(--darkRed);
+    text-decoration: underline;
+}
+.symbol {
+    color: var(--lightYellow);
+    font-size: larger;
+}
+.clearButton {
+    margin: 10px 20vw 0 70vw;
+}

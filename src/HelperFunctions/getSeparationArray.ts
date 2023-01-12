@@ -17,15 +17,12 @@ const getSeparationHelper : Function = (seperationArray: Array<Person>, id: numb
             getSeparationHelper(seperationArray, currentPerson.connections[i], targetId, visitedIds, people, seperationArrayCollection)
             seperationArray.pop()
             visitedIds.pop()
-            if(targetId === currentPerson.connections[i]){
-                return
-            }
         }
     }
    
 }
 
-export const getSeparation : Function = (people : Array<Person>, personOne: string, personTwo: string) : Array<Person> => {
+export const getSeparation : Function = (people : Array<Person>, personOne: string, personTwo: string) : Array<Array<Person>> => {
     let personOneId : number = 0;
     let personTwoId : number = 0;
     let seperationArray : Array<Person> = []
@@ -37,7 +34,7 @@ export const getSeparation : Function = (people : Array<Person>, personOne: stri
         }
       })
       if(personOneId === 0){
-        return seperationArray
+        return seperationArrayCollection
       }
       
       people.forEach(person => {
@@ -46,18 +43,13 @@ export const getSeparation : Function = (people : Array<Person>, personOne: stri
         }
       })
       if(personTwoId === 0){
-        return seperationArray
+        return seperationArrayCollection
       }
       getSeparationHelper(seperationArray, personOneId, personTwoId, visitedIds, people, seperationArrayCollection)
       if(seperationArrayCollection.length === 0){
         return []
       }
-      seperationArray = seperationArrayCollection[0]
-      seperationArrayCollection.forEach(collection => {
-        if(collection.length < seperationArray.length){
-            seperationArray = collection
-        }
-      })
       
-      return seperationArray
+      
+      return seperationArrayCollection
 }

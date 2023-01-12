@@ -10,46 +10,52 @@ type PeopleArray = {
 const DegreeOfSeparation: React.FC<PeopleArray> = ({people} : PeopleArray) : JSX.Element => {
     const [personOne, setPersonOne] = useState<string>("")
     const [personTwo, setPersonTwo] = useState<string>("")
-    const [displayMessage, setDisplayMessage] = useState<Array<string>>(["Write two names to find degree of separation"])
-    const [separationArray, setSeparationArray] = useState<Array<Person>>([])
+    
+    const [separationArrayCollection, setSeparationArrayCollection] = useState<Array<Array<Person>>>([])
     
     const checkDegreeOfSeparation : Function = () => {
         if(personOne === personTwo){
             setPersonOne("")
             setPersonTwo("")
-            setDisplayMessage(["Both names cannot be same"])
             return
         }
-        setSeparationArray(getSeparation(people, personOne, personTwo));
-        setDisplayMessage(["Result cannot be displayed because of one of these two reasons", "1. Atleast one entered name is not present in the list of people", "2. There is no connection between the two"])
+        setSeparationArrayCollection(getSeparation(people, personOne, personTwo));
+        
         setPersonOne("")
         setPersonTwo("")
     }
     return (
-    <>
+    <section className="degreeOfSeparation">
+        <h1 className="separationHeading">Degrees of Separation</h1>
+        <>
+        
         {
-            separationArray.length === 0 ?
-        
-            displayMessage.map(message => {
-                return <p key={0}>{message}</p>
+           
+            separationArrayCollection.length === 0 ? <p className="enterNames">Please enter names of 2 distinct people who are connected either directy or indirectly</p> :
+        separationArrayCollection.map(separationArray => {
+            return <div className="separationsDiv">{
+            separationArray.map((person, index) => {
+                return (
+                <div key={person.id}>
+                    <span className="separation">{person.name}</span>
+                    {index === separationArray.length - 1 ? null :<span className="symbol">&gt;</span>}
+                </div>
+                )
             })
-         :
-        
-            separationArray.map(person => {
-                return <p key={person.id}>{person.name}</p>
-            })
-        
+            }</div>
+        })    
         }
-        <form onSubmit={(e) => {
+        <form className="seperationForm" onSubmit={(e) => {
             e.preventDefault()
             checkDegreeOfSeparation()
         }}>
-            <input type="text" value={personOne} onChange={(e) => setPersonOne(e.target.value)} placeholder="Name" required />
-            <input type="text" value={personTwo} onChange={(e) => setPersonTwo(e.target.value)} placeholder="Name" required />
-            <input type="submit" />
+            <input type="text" className="separationInput" value={personOne} onChange={(e) => setPersonOne(e.target.value)} placeholder="Name" required />
+            <input type="text" className="separationInput" value={personTwo} onChange={(e) => setPersonTwo(e.target.value)} placeholder="Name" required />
+            <input className="separationSubmit" type="submit" />
         </form>
-        
-    </>
+        </>
+    </section>
+
     )
 }
 

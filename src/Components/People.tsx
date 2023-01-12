@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Person } from "../App";
+import "../CSS/global.css"
 
 type PeopleArray = {
     people: Array<Person>,
@@ -15,19 +16,24 @@ const People : React.FC<PeopleArray> = ({ people, addPerson } : PeopleArray) : J
     }
 
     return (
-        <section>
+        <section className="people">
+            <h1 className="peopleHeading">List of Added People</h1>
+            <div className="personNames">
             {
+                people.length === 0 ? <p className="emptyMessage">There are no people added in the list.</p> :
                 people.map(person => {
-                    return <p key={person.id}>{person.name}</p>
+                    return <p className="personName" key={person.id}>{person.name}</p>
                 })
             }
-            <form onSubmit={(e) => {
+            </div>
+            <form className="peopleForm" onSubmit={(e) => {
                 e.preventDefault()
                 submitPersonName()
             }}>
-                <input value={personName} onChange={(e) => setPersonName(e.target.value)} type="text" placeholder="Name" required />
-                <input type="submit" />
+                <input className="nameInput" value={personName} onChange={(e) => setPersonName(e.target.value)} type="text" placeholder="Name" required />
+                <input className="submitButton" type="submit" value="Add Person" />
             </form>
+            <p className="personMessage">Add a person to list of people</p>
         </section>
     )
 }
