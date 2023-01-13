@@ -20,6 +20,11 @@ const App: React.FC = () : JSX.Element => {
       name: name,
       connections: []
     }
+    for(let i = 0; i < people.length; i++){
+      if(newPerson.name === people[i].name){
+        return
+      }
+    }
     setPeople((prev) => {
       return [...prev, newPerson]
     })
@@ -41,17 +46,15 @@ const App: React.FC = () : JSX.Element => {
       if(person.name === personOne){
         personOneId = person.id;
       }
-    })
-    if(personOneId === 0){
-      return `${personOne} is not present in list of people`
-    }
-    
-    people.forEach(person => {
       if(person.name === personTwo){
         personTwoId = person.id;
         personTwoRef = person
       }
     })
+    if(personOneId === 0){
+      return `${personOne} is not present in list of people`
+    }
+    
     if(personTwoId === 0){
       return `${personTwo} is not present in list of people`
     }
