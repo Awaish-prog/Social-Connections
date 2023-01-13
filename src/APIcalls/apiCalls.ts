@@ -1,5 +1,7 @@
+const url = "https://social-connections-server.onrender.com"
+
 export const addPersonToServer : Function = async (uid: Number, personName: String) => {
-    await fetch("http://localhost:3001/api/createPerson", {
+    await fetch(`${url}/api/createPerson`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -11,7 +13,7 @@ export const addPersonToServer : Function = async (uid: Number, personName: Stri
 }
 
 export const addConnectionToServer : Function = async (uidOne: Number, uidTwo: Number) => {
-    await fetch("http://localhost:3001/api/addConnection", {
+    await fetch(`${url}/api/addConnection`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -23,13 +25,13 @@ export const addConnectionToServer : Function = async (uidOne: Number, uidTwo: N
 }
 
 export const deleteAllPeople : Function = async () => {
-    await fetch("http://localhost:3001/api/deleteAllPeople", {
+    await fetch(`${url}/api/deleteAllPeople`, {
         method: "DELETE",
     })
 }
 
 export const getAllPeopleFromServer : Function = async () => {
-    let response = await fetch("http://localhost:3001/api/getAllPeople", {
+    let response = await fetch(`${url}/api/getAllPeople`, {
         method: "GET",
     })
     const allPeople = await response.json()
