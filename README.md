@@ -1,42 +1,8 @@
-# react-typescript-example
-
-## Table of Contents
-
+# Social-Connections
 
 ## About The Author
 
-**JC Lango** is a UI Architect and UI Developer for large scale web applications at several Fortune 500 companies.
-
-
-JC may be available to work remote, and can be contacted at these links:
- 
-* LinkedIn: [https://www.linkedin.com/in/jclango](https://www.linkedin.com/in/jclango)
-* Email: [jobs@jclango.com](mailto:jobs@jclango.com)
-
-## Compare Same App With Redux or JSX or Angular or Polymer
-
-### Same App In React Redux
-
-You can compare this app to the same app with Redux.
-
-This is a good way to see how to convert an existing React app to React Redux.
-
-- [react-redux-example](https://github.com/reactjsexample/react-redux-example)
-
-### Same App In React JSX
-
-You can compare this app to the same app with React JSX.
-
-This is a good way to see how to convert an existing React app to React TypeScript.
-
-- [react-example-app](https://github.com/reactjsexample/react-example-app)
-
-### Same App In Angular Or Polymer
-
-Here is the same app written in Angular and Polymer:
-
-- [angular-9-example-app](https://github.com/angularexample/angular-9-example-app)
-- [polymer-3-example-app](https://github.com/polymerexample/polymer-3-example-app)
+I am a Fullstack Developer, I use MERN stack to build projects.
 
 ## Project Setup
 
@@ -70,22 +36,6 @@ The browser will automatically reload if you change any of the source files.
 
 Open the browser's Developer Tools window to see any errors in the Console.
 
-### How To Run Unit Tests
-
-To run the unit tests, you need to stop the server.
- 
-If the server is running, stop the server from the terminal window by pressing *Control-C*.
-
-To run the unit tests, Run the following command in the terminal window.
-
-#### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### How To Build For Production
-
-Run the following command to do a production build.
 
 #### `npm run build`
 
@@ -95,7 +45,6 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 #### `npm run eject`
 
@@ -107,15 +56,6 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Software Libraries Used
-
-* react 16.9.0
-* react-router-dom 5.0.1
-* typescript 3.6.2
-* node-sass 4.12.0
-* @material-ui/core 4.4.0
-
-For more information see the [package.json](https://github.com/reactjsexample/react-typescript-example/blob/master/package.json) file.
 
 ## Learn More About React
 
