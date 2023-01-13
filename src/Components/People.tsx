@@ -21,8 +21,8 @@ const People : React.FC<PeopleArray> = ({ people, addPerson } : PeopleArray) : J
             <div className="personNames">
             {
                 people.length === 0 ? <p className="emptyMessage">There are no people added in the list.</p> :
-                people.map(person => {
-                    return <p className="personName" key={person.id}>{person.name}</p>
+                people.map((person, index) => {
+                    return <p className="personName" key={index}>{person.name}</p>
                 })
             }
             </div>

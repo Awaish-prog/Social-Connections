@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { addConnectionToServer, addPersonToServer, deleteAllPeople, getAllPeopleFromServer } from './APIcalls/apiCalls';
 import AddConnection from './Components/AddConnection';
 import DegreeOfSeparation from './Components/DegreeOfSeparation';
 import People from './Components/People';
+import { getPerson } from './HelperFunctions/getPerson';
 
 export interface Person {
-  id: number
+  id: number,
   name: string,
   connections: number[]
+}
+interface Response {
+  uid: number,
+  name: string,
+  connections: number[]
+}
+
+interface AllPeople {
+  allPeople: Array<Person>
 }
 
 const App: React.FC = () : JSX.Element => {
@@ -31,6 +42,7 @@ const App: React.FC = () : JSX.Element => {
     setUid((prev) => {
       return prev + 1
     })
+    addPersonToServer(newPerson.id, newPerson.name)
   }
 
   const addConnection : Function = (personOne: string, personTwo: string): string => {
@@ -41,7 +53,8 @@ const App: React.FC = () : JSX.Element => {
       name: "",
       connections: []
     };
-
+    console.log(getPerson(people, 1));
+     
     people.forEach(person => {
       if(person.name === personOne){
         personOneId = person.id;
@@ -84,6 +97,7 @@ const App: React.FC = () : JSX.Element => {
     setConnections(prev => {
       return [...prev, `${personOne} and ${personTwo} are friends`]
     })
+    addConnectionToServer(personOneId, personTwoId)
     return `Connection Added between ${personOne} and ${personTwo}`
   }
 
@@ -91,7 +105,34 @@ const App: React.FC = () : JSX.Element => {
     setConnections([])
     setPeople([])
     setUid(1)
+    deleteAllPeople()
   }
+
+  const updateConnections : Function = (allPeople: Array<Person>) : void => {
+    const connectionsArray : Array<string> = []
+    allPeople.forEach(person => {
+      person.connections.forEach(connection => {
+        const connectionName : string = getPerson(allPeople, connection).name
+          if(!connectionsArray.includes(`${person.name} and ${connectionName} are friends`) && !connectionsArray.includes(`${connectionName} and ${person.name} are friends`)){
+            connectionsArray.push(`${person.name} and ${connectionName} are friends`)
+          }
+      })
+    });
+    
+    
+    setConnections(connectionsArray)
+  }
+
+  const getAllPeople : Function = async () => {
+    const allPeople : Array<Person> = await getAllPeopleFromServer()
+    setPeople(allPeople)
+    updateConnections(allPeople)
+    setUid(allPeople.length + 1)
+  }
+
+  useEffect(() => {
+    getAllPeople()
+  }, [])
 
   return (
     <>
