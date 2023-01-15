@@ -36,9 +36,9 @@ const DegreeOfSeparation: React.FC<PeopleArray> = ({people} : PeopleArray) : JSX
             return <div className="separationsDiv">{
             separationArray.map((person, index) => {
                 return (
-                <div key={person.id}>
-                    <span className="separation">{person.name}</span>
-                    {index === separationArray.length - 1 ? null :<span className="symbol">&gt;</span>}
+                <div className="singleSeparation" key={person.id}>
+                    <p className="separation">{person.name}</p>
+                    {index === separationArray.length - 1 ? null :<p className="symbol">&gt;</p>}
                 </div>
                 )
             })

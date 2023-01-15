@@ -137,9 +137,11 @@ const App: React.FC = () : JSX.Element => {
   return (
     <>
     <button onClick={() => {clearData()}} className='clearButton'>Clear Data</button>
-    <People people={people} addPerson={addPerson} />
-    <AddConnection addConnection={addConnection} connections={connections} />
-    <DegreeOfSeparation people={people} />
+    <section className='mainSection'>
+      <People people={people} addPerson={addPerson} />
+      <AddConnection addConnection={addConnection} connections={connections} />
+      <DegreeOfSeparation people={people} />
+    </section>
     </>
   );
 }
