@@ -1,4 +1,5 @@
-const url = "https://social-connections-server.onrender.com"
+const url = "https://social-connections-server.vercel.app"
+
 
 export const addPersonToServer : Function = async (uid: Number, personName: String) => {
     await fetch(`${url}/api/createPerson`, {
